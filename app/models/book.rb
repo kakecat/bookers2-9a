@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+
   has_many :view_counts, dependent: :destroy
 
   validates :title,presence:true
@@ -18,7 +19,7 @@ class Book < ApplicationRecord
       Book.where("title LIKE?","#{word}%")
     elsif search == "backward"
       Book.where("title LIKE?","%#{word}")
-    else search == "partial"
+    else
       Book.where("title LIKE?","%#{word}%")
     end
   end
